@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.maven.parent</artifactId>
-		<version>2.11.0-SNAPSHOT</version>
+		<version>2.11.0.beta2</version>
 		<relativePath>org.eclipse.xtext.parent</relativePath>
 	</parent>
 
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.maven.root</artifactId>
 	<packaging>pom</packaging>
-	<version>2.11.0-SNAPSHOT</version>
+	<version>2.11.0.beta2</version>
 
 	<modules>
 		<module>org.eclipse.xtext.parent</module>

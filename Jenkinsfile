@@ -11,7 +11,11 @@ node {
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
-		sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean deploy"
+		try {
+			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean deploy"
+		} finally {
+			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+		}
 		archive 'build/**'
 		
 		if (currentBuild.result == 'UNSTABLE') {
@@ -22,7 +26,5 @@ node {
 	} catch (e) {
 		slackSend color: 'danger', message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		throw e
-	} finally {
-		step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 	}
 }

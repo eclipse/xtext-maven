@@ -152,7 +152,7 @@ public class XtextGeneratorIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath(), true);
-//		verifier.addCliOption("-o");
+		// verifier.addCliOption("-U");
 		// verifier.setForkJvm(!debug);
 		String mvnOpts = CommandLineUtils.getSystemEnvVars().getProperty("MAVEN_OPTS");
 		String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g -XX:MaxPermSize=256m";

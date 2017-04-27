@@ -17,7 +17,7 @@ node {
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
 		try {
-			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository clean deploy"
+			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository clean deploy"
 		} finally {
 			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 		}

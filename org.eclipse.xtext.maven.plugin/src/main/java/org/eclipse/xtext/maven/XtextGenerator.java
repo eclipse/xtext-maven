@@ -14,6 +14,7 @@ import java.util.Set;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -95,6 +96,11 @@ public class XtextGenerator extends AbstractMojo {
 	 * @required
 	 */
 	private List<Language> languages;
+	
+	/**
+	 * @parameter
+	 */
+	private List<ProjectMapping> projectMappings;
 
 	/**
 	 * @parameter expression="${xtext.generator.skip}" default-value="false"
@@ -130,6 +136,11 @@ public class XtextGenerator extends AbstractMojo {
 	 */
 	private ClusteringConfig clusteringConfig;
 
+	/**
+	 * @parameter default-value="false"
+	 */
+	private Boolean autoFillPlatformResourceMap = Boolean.FALSE;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -141,7 +152,8 @@ public class XtextGenerator extends AbstractMojo {
 		} else {
 			new MavenLog4JConfigurator().configureLog4j(getLog());
 			configureDefaults();
-			addToPlatformResourceMap(project);
+			autoAddToPlatformResourceMap(project);
+			manuallyAddToPlatformResourceMap();
 			internalExecute();
 		}
 	}
@@ -222,6 +234,14 @@ public class XtextGenerator extends AbstractMojo {
 		this.languages = languages;
 	}
 
+	public List<ProjectMapping> getProjectMappings() {
+		return projectMappings;
+	}
+
+	public void setProjectMappings(List<ProjectMapping> projectMappings) {
+		this.projectMappings = projectMappings;
+	}
+
 	private void configureDefaults() {
 		if (sourceRoots == null) {
 			sourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
@@ -238,14 +258,29 @@ public class XtextGenerator extends AbstractMojo {
 	 *
 	 * @param project the project
 	 */
-	private static void addToPlatformResourceMap(final MavenProject project) {
-		addToPlatformResourceMap(project.getBasedir());
-		project.getModules().stream()
-				.map(module -> new File(project.getBasedir(), module))
-				.forEach(XtextGenerator::addToPlatformResourceMap);
+	private void autoAddToPlatformResourceMap(final MavenProject project) {
+		if (autoFillPlatformResourceMap) {
+			addToPlatformResourceMap(project.getBasedir(), getLog());
+			project.getModules().stream().map(module -> new File(project.getBasedir(), module))
+					.forEach(e -> addToPlatformResourceMap(e, getLog()));
 
-		if (project.getParent() != null)
-			addToPlatformResourceMap(project.getParent());
+			if (project.getParent() != null)
+				autoAddToPlatformResourceMap(project.getParent());
+		}
+	}
+	
+	private void manuallyAddToPlatformResourceMap() {
+		if (projectMappings != null) {
+			for (ProjectMapping projectMapping : projectMappings) {
+				if (projectMapping.getPath() != null && projectMapping.getProjectName() != null) {
+					String path = new File(projectMapping.getPath()).toURI().toString();
+					String name = projectMapping.getProjectName();
+					getLog().info("Adding project '" + name + "' with path '" + path +"' to Platform Resource Map");
+					final URI uri = URI.createURI(path);
+					EcorePlugin.getPlatformResourceMap().put(name, uri);
+				}
+			}
+		}
 	}
 
 	/**
@@ -256,7 +291,8 @@ public class XtextGenerator extends AbstractMojo {
 	 * @return the registered URI pointing to the given file
 	 * @see EcorePlugin#getPlatformResourceMap()
 	 */
-	private static URI addToPlatformResourceMap(final File file) {
+	private static URI addToPlatformResourceMap(final File file, final Log log) {
+		log.info("Adding project '" + file.getName() + "' with path '" + file.toURI().toString()+"' to Platform Resource Map");
 		final URI uri = URI.createURI(file.toURI().toString());
 		return EcorePlugin.getPlatformResourceMap().put(file.getName(), uri);
 	}

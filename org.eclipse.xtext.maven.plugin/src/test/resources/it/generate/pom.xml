@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>xtext-maven-plugin-it</artifactId>
 	<version>IT-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>milestone_2.19.0.M3</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<xtext-version>2.19.0-SNAPSHOT</xtext-version>
+		<xtext-version>2.19.0.M3</xtext-version>
 		<tycho-version>1.4.0</tycho-version>
 		<eclipse-text-version>3.6.100</eclipse-text-version>
 		<core-resources-version>3.12.0</core-resources-version>
@@ -25,7 +22,6 @@
 		<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
 		<ecore-xtext-version>1.4.0</ecore-xtext-version>
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -67,7 +63,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
@@ -75,7 +70,6 @@
 			<version>${xtext-version}</version>
 		</dependency>
 	</dependencies>
-	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<pluginManagement>
@@ -108,7 +102,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
 	<repositories>
 		<repository>
 			<id>lsp4j-from-jenkins</id>

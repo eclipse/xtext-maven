@@ -50,7 +50,9 @@ public class MavenLog4JConfigurator {
 				}
 				Throwable throwable = getThrowable(event);
 				if (throwable != null) {
-					// Log4j throws a NullPointerException if throwable is null
+					// Loggers like org.apache.maven.plugin.logging.SystemStreamLog
+					// (used by Maven Testing Harness)
+					// throw a NullPointerException if throwable is null
 					if (Level.DEBUG == event.getLevel()) {
 						log.debug((CharSequence) event.getMessage(), throwable);
 					} else if (Level.INFO == event.getLevel()) {

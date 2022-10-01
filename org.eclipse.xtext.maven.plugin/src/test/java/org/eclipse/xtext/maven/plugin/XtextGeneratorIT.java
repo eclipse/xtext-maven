@@ -78,7 +78,7 @@ public class XtextGeneratorIT {
 	public void purexbase() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/purexbase");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/IntegrationTestXbase.class");
 	}
 
 	@Test
@@ -86,35 +86,35 @@ public class XtextGeneratorIT {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/clustering");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase2.java");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase2.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/IntegrationTestXbase.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/IntegrationTestXbase2.class");
 	}
 
 	@Test
 	public void outputPerGoal() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/output-per-goal");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/SimpleClassXbase.java");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/SimpleClassXbase.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/SimpleClassXbase.class");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-test-gen/SimpleTestClassXbase.java");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/SimpleTestClassXbase.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/SimpleTestClassXbase.class");
 	}
 
 	@Test
 	public void outputPerSource() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/output-per-source");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/IntegrationTestXbase.class");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/other-gen/OtherIntegrationTestXbase.java");
 		verifier.verifyFilePresent(
-				verifier.getBasedir() + "/target/xtext-temp/classes/OtherIntegrationTestXbase.class");
+				verifier.getBasedir() + "/target/xtext-temp/stub-classes/OtherIntegrationTestXbase.class");
 	}
 
 	@Test
 	public void javaLangBiRef() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/java-lang-bi-ref");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/XbaseReferToJava.java");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/XbaseReferToJava.class");
-		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/JavaClazz.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/XbaseReferToJava.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/JavaClazz.class");
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class XtextGeneratorIT {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/aggregate");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/purexbase/src-gen/IntegrationTestXbase.java");
 		verifier.verifyFilePresent(
-				verifier.getBasedir() + "/purexbase/target/xtext-temp/classes/IntegrationTestXbase.class");
+				verifier.getBasedir() + "/purexbase/target/xtext-temp/stub-classes/IntegrationTestXbase.class");
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class XtextGeneratorIT {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang", true, "clean", "verify");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.verifyFilePresent(
-				verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
+				verifier.getBasedir() + "/target/xtext-temp/stub-classes/org/eclipse/xcoretest/MyClass2.class");
 		verifier.verifyFileContentMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java",
 				"(?s).*MY_FIRST_LITERAL\\(-7.*MY_SECOND_LITERAL\\(137.*");
 	}

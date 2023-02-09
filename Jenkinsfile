@@ -41,7 +41,7 @@ pipeline {
         dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
         sh '''
           mvn \
-            -f org.eclipse.xtext.maven.parent/pom.xml \
+            -f org.eclipse.xtext.maven.releng/pom.xml \
             --batch-mode \
             --update-snapshots \
             -fae \

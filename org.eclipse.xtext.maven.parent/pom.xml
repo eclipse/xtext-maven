@@ -3,42 +3,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.eclipse.xtext</groupId>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-maven</artifactId>
+		<version>2.30.0-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>org.eclipse.xtext.maven.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.30.0-SNAPSHOT</version>
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
 		<maven.version>3.6.0</maven.version>
-		<tycho-version>2.7.5</tycho-version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
 		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.eclipse.xtext</groupId>
-				<artifactId>xtext-dev-bom</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<modules>
-		<module>../org.eclipse.xtext.maven.plugin</module>
-	</modules>
-	
 	<build>
 		<extensions>
 			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->

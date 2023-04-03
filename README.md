@@ -1,5 +1,11 @@
 # Maven Support For The Xtext Framework
 
+## Notice
+
+The content of this repository (`xtext-maven`) has been moved to the [Xtext Monorepo](https://github.com/eclipse/xtext/). Please refer to that repository to find the code, create issues or file pull requests.
+
+## About
+
 This repository contains the [Maven plug-in for Xtext](https://www.eclipse.org/Xtext/documentation/350_continuous_integration.html).
 
 ## How To Build
